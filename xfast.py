@@ -1,14 +1,27 @@
+# X-trie class implementation
+#
+
+
+
 INPUT_YEAR = 1977
-m = 128
+order = 7
 
 class Xtrie(object):
-  def __init__(self,m):
-    self.DAT =[False for x in range(m)] # direct access table]
-    
-    
+  def __init__(self,order):
+    self.size = 2**order
+    self.DAT =[False for x in range(self.size)] # direct access table
+    self.heap =[False for x in range(2*self.size)] # direct access table
+
   def mark_year(self,year):
-    self.DAT[year-1900] = True
-    
+    index = year-1900
+    self.DAT[index] = True
+    self.heap[self.size + index] = True
+    pointer = self.size + index
+    for i in range(order):
+        pointer = pointer /2
+        self.heap[pointer] = True
+
+
   def self_report(self):
     for index, el in enumerate(self.DAT):
       if el:
@@ -16,10 +29,10 @@ class Xtrie(object):
 
 
 
-mytrie = Xtrie(m)
+mytrie = Xtrie(order)
 years = [int(year_str) for year_str in open('years.txt','rb').readlines()]
 
 for year in years:
   mytrie.mark_year(year)
-  
+
 mytrie.self_report()

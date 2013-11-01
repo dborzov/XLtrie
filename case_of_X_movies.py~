@@ -13,7 +13,7 @@ for year in open('years.txt','rb').readlines():
 
 titles = []
 for i, title in enumerate(open('result.txt','rb').readlines()):
-  titles.append(title[:-1]+' ('+str(years[i] + YEAR_SHIFT)+')')
+  titles.append(title[:-2]+' ('+str(years[i] + YEAR_SHIFT)+')')
 
 
 mytrie = xfast.Xtrie(order)

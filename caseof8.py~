@@ -28,4 +28,4 @@ for t in ax.yaxis.get_major_ticks():
     t.tick2On = False
 
 
-plt.savefig('figure33.png')
+plt.savefig('figure.png')

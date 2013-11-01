@@ -6,12 +6,13 @@ out = open('result.txt','wb')
 yearsonly = open('years.txt','wb')
 
 cleared = []
+years = {}
 for each in source:
   match = re.search('(^[\W\w\s,]+) \((\d\d\d\d)\)',each)
   if match:
     hasX = re.search('X',match.group(1))
-    if hasX and not match.group(2) in cleared:
-      cleared.append(match.group(2))
+    if hasX:
+      cleared.append()
       out.write(match.group(1)+'\n')
       yearsonly.write(match.group(2)+'\n')
        

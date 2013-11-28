@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta charset="utf-8">
+
+
+
+    <title>dimaborzov.com/texts/xfast (Predecessor search for Big Data: intro to x-fast tries)</title>
+
+    <link rel="stylesheet" href="./css/style.css" type="text/css">
+
+    <link rel="stylesheet" href="./css/_pygments.css" type="text/css">
+
+      <style type="text/css"></style>
+
+      <script type="text/javascript" src="./js/latexit.js"></script>
+
+  </head>
+
+  <body screen_capture_injected="true">
+
+    <div class="container">
+
+      <div class="header">
+
+        <a href="http://dimaborzov.com">Dima Borzov</a>'s code and writings<br>
+
+        <a href="http://dimaborzov.com">dimaborzov.com</a> / texts / xfast (May, 2013)
+
+
+
+      </div>
+
+      <div class="navigation">
+
+        <ul>
+
+          <li><a href="https://github.com/dborzov"><img src="./css/octocat.png" width="20">Github</a>
+
+        </li></ul>
+
+      </div>
+
+
+
+      <div class="body">
+<h1>Predecessor search for Big Data: intro to x-fast tries</h1>
+
+<h3><em>Abstract:</em> Abstracticus</h3>
+
+<p>Imagine you are developing a flight search engine and need to make the search lookup time as fast as possible. You know that the How should you organize your flight indexing to speed up the search?</p>
+
+<p>####</p>
+
+<p>Imagine you are developing an internet flight search service. You want to design some kind of indexing in such a way so that they would be effective at processing queries you expect to be most common in your applications.</p>
+
+<p>For the flight search website that would include the two following typical database tasks:</p>
+
+<ul>
+<li><strong>Looking up</strong>: searching for the next closest flights meeting some criteria for the given date and time (like <em>"the next flight to Paris on Oct 9th after 9am"</em>);</li>
+<li><strong>Updating</strong>: adding, editing or deleting specific flight records on request (like <em>"the flight to Paris on Oct 9th 10am is canceled"</em>).</li>
+</ul>
+
+<p>This problem of optimizing the flight is an example of the predecessor/successor search problem. It involves storing a dictionary with keys that make a subset of some subset</p>
+
+<p>X-fast tries is a data structure designed to store a subset of elements from a sequence in such a way so that it is possible to retrieve the next closest  element easily. People refer to such problems as the predecessor/ successor search.</p>
+
+<p>I have been reading up about <a href="http://en.wikipedia.org/wiki/X-fast_trie">x-fast tries</a> recently and decided to write up some notes  and also to make a simple python implementation to go along with it.</p>
+
+<p>Obviously, it is incredibly inefficient to just store them as a list and go through the list each time. We need some kind of a search tree.</p>
+
+<p>Times of planes leaving (for example, in minutes) make up a subset of all the possible times (all minutes in the span of the existence of that specific airport). thus we can store them as a set of natural numbers  in a certain range of integers.</p>
+
+<p>So with that representation we can use the Direct Access Table. That is, make up a binary table of size  |S|.</p>
+
+<p>What are some ways to tackle the predecessor/successor problem? Naively we can just move along up the Direct Access Table until we stumble upon the next record. The worst case scenario here would be just going through the whole empty table, <strong>O(m)</strong> .</p>
+
+<p>One improvement is to store pointers for predecessor/successor elements at each element. It does improve the predecessor/successor retrieval to just <strong>O(1)</strong> . However, we have a inserting or deleting elements becomes a costly procedure as we have to reassign every nearby value, <strong>O(m)</strong>.</p>
+
+<p>Here is the proposition. We build an ordered binary tree atop the m elements and mark every node that is a parent of the checked element. With each layer having two times less elements we only increased the total size of the array by two.</p>
+
+      </div>
+
+      <div class="footer">
+
+        <p><a href="http://creativecommons.org/licenses/by-nc-sa/2.5/ca/"><img src="./css/cc.jpg" width="15"></a> Dima Borzov, 2013.
+
+        </p>
+
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+</div></body>
+
+<script>
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+
+
+  ga('create', 'UA-41000570-1', 'dimaborzov.com');
+
+  ga('send', 'pageview');
+
+
+
+</script>
+
+
+
+</html>

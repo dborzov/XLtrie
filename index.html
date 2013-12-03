@@ -8,7 +8,7 @@
 
 
 
-    <title>dimaborzov.com/texts/xfast (Predecessor search for Big Data: intro to x-fast tries)</title>
+    <title>borzov.ca/texts/xfast (Predecessor search for Big Data: x-fast tries, locality of reference and all that)</title>
 
     <link rel="stylesheet" href="./css/style.css" type="text/css">
 
@@ -26,9 +26,9 @@
 
       <div class="header">
 
-        <a href="http://dimaborzov.com">Dima Borzov</a>'s code and writings<br>
+        <a href="http://www.borzov.ca">Peter Borzov</a>'s code and writings<br>
 
-        <a href="http://dimaborzov.com">dimaborzov.com</a> / texts / xfast (May, 2013)
+        <a href="http://www.borzov.ca">borzov.ca</a> / texts / xfast (May, 2013)
 
 
 
@@ -47,15 +47,19 @@
 
 
       <div class="body">
-<h1>Predecessor search for Big Data: intro to x-fast tries</h1>
+<h1>Predecessor search for Big Data: x-fast tries, locality of reference and all that</h1>
 
-<h3><em>Abstract:</em> Abstracticus</h3>
+<h3><em>Abstract:</em> We get a bird eye view on the fascinating field of the locality of reference-type of problems and then get practical and solve our toy problem by implementing an x-fast trie in Python.</h3>
 
-<p>Imagine you are developing a flight search engine and need to make the search lookup time as fast as possible. You know that the How should you organize your flight indexing to speed up the search?</p>
+<p>Imagine you are developing a flight search website. You need to build a tailored search index that is really good at one task: for the given date and search criteria returns the list of the next flights. How is it better to approach designing this?</p>
 
-<p>####</p>
+<p>This is an example of encountering predecessor/successor search problem in practice. Predecessor/successor search (or predecessor search for 'short') stands for cases when we have some dictionary (<em>in our case, the flight timetable</em>) with its keys (<em>departure times</em>) making up a subset of some ordered sequence (<em>like all minutes in the time range of interest or something</em>).</p>
 
-<p>Imagine you are developing an internet flight search service. You want to design some kind of indexing in such a way so that they would be effective at processing queries you expect to be most common in your applications.</p>
+<p>We want to design a system that for a given query element of that sequence (such as <em>our preferable flying date and time</em>) would return the closest next subsequest element that is a key of our dictionary(<em>next flight from our query time</em>):</p>
+
+<p></p><center><div lang="latex">
+<img src="./img/arrow.png" alt="Img" />
+</div></center><br><p></p>
 
 <p>For the flight search website that would include the two following typical database tasks:</p>
 
@@ -82,11 +86,27 @@
 
 <p>Here is the proposition. We build an ordered binary tree atop the m elements and mark every node that is a parent of the checked element. With each layer having two times less elements we only increased the total size of the array by two.</p>
 
+<h2>Toy problem</h2>
+
+<p>Here is a nice toy problem that I came up with in hope that it would make some cool-loking plots.</p>
+
+<p>With movie and tv show titles such as X-files, X-men and American History X, we have a trope of X standing for anything misterious (and heavily implied to be hip). How often are movies with such titles released? What was the first X-movie released since your birth?</p>
+
+<p>To find out, let us build the X-fast trie index for such X-titled movies by the year of release.</p>
+
+<p>Here is a plot of what we get:</p>
+
+<p></p><center><div lang="latex">
+<img src="./img/movies.png" alt="Img" />
+</div></center><br><p></p>
+
+<p>Pretty nice, huh?</p>
+
       </div>
 
       <div class="footer">
 
-        <p><a href="http://creativecommons.org/licenses/by-nc-sa/2.5/ca/"><img src="./css/cc.jpg" width="15"></a> Dima Borzov, 2013.
+        <p><a href="http://creativecommons.org/licenses/by-nc-sa/2.5/ca/"><img src="./css/cc.jpg" width="15"></a>Peter Borzov, 2013.
 
         </p>
 

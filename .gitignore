@@ -1,4 +1,5 @@
 *.py[cod]
+*.py~ # You're welcome http://img.ctrlv.in/img/52a49422476a0.jpg
 
 # C extensions
 *.so
